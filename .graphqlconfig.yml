@@ -1,0 +1,15 @@
+projects:
+  Studentattendance:
+    schemaPath: amplify/backend/api/Studentattendance/build/schema.graphql
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        region: eu-west-2
+        apiId: null
+        maxDepth: 2

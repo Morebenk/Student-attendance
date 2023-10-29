@@ -1,12 +1,13 @@
 <template>
-  <div class="app">
-    <!-- Sidebar -->
-    <Sidebar :signOut="signOut" />
+  <authenticator :loginMecanism="['email']" v-slot="{ signOut }">
+    <div class="app">
+      <!-- Sidebar -->
+      <Sidebar :signOut="signOut" />
 
-    <!-- Content -->
-    <router-view />
-  </div>
-  <!--  <authenticator :loginMecanism="['email']" v-slot="{ signOut }"></authenticator> -->
+      <!-- Content -->
+      <router-view />
+    </div>
+  </authenticator>
 </template>
 
 <script setup>

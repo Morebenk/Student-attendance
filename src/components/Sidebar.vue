@@ -50,7 +50,7 @@
         <span class="text">Settings</span>
       </router-link>
       <router-link to="/" class="button">
-        <span class="material-icons">logout</span>
+        <span class="material-icons" @click="props.signOut">logout</span>
         <span class="text" @click="props.signOut">Sign out</span>
       </router-link>
     </div>

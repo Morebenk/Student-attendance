@@ -122,9 +122,15 @@
 </template>
 
 <script>
+import { API, graphqlOperation } from "aws-amplify";
+import { listStudents } from "../graphql/queries";
+import { listMajors } from "../graphql/queries";
+import { listYears } from "../graphql/queries";
+
 import axios from "axios";
 import StudentForm from "../components/StudentForm.vue";
 import FileUpload from "../components/FileUpload.vue";
+
 export default {
   components: {
     StudentForm,
@@ -189,55 +195,55 @@ export default {
     },
   },
 
-  async mounted() {
-    try {
-      const response = await axios.get("http://localhost:1111/api/v1/students");
-      this.students = response.data;
-    } catch (error) {
-      console.error("An error occurred while fetching data: ", error);
-    }
-
-    try {
-      const majorResponse = await axios.get(
-        "http://localhost:1111/api/v1/majors"
-      );
-      this.majors = majorResponse.data;
-    } catch (error) {
-      console.error("An error occurred while fetching majors: ", error);
-    }
-
-    try {
-      const yearResponse = await axios.get(
-        "http://localhost:1111/api/v1/years"
-      );
-      this.years = yearResponse.data;
-    } catch (error) {
-      console.error("An error occurred while fetching years: ", error);
-    }
-  },
-
   // async mounted() {
   //   try {
-  //     const studentResponse = await API.graphql(graphqlOperation(listStudents));
-  //     this.students = studentResponse.data.listStudents.items;
+  //     const response = await axios.get("http://localhost:1111/api/v1/students");
+  //     this.students = response.data;
   //   } catch (error) {
-  //     console.error("An error occurred while fetching students: ", error);
+  //     console.error("An error occurred while fetching data: ", error);
   //   }
 
   //   try {
-  //     const majorResponse = await API.graphql(graphqlOperation(listMajors));
-  //     this.majors = majorResponse.data.listMajors.items;
+  //     const majorResponse = await axios.get(
+  //       "http://localhost:1111/api/v1/majors"
+  //     );
+  //     this.majors = majorResponse.data;
   //   } catch (error) {
   //     console.error("An error occurred while fetching majors: ", error);
   //   }
 
   //   try {
-  //     const yearResponse = await API.graphql(graphqlOperation(listYears));
-  //     this.years = yearResponse.data.listYears.items;
-  //     } catch (error) {
+  //     const yearResponse = await axios.get(
+  //       "http://localhost:1111/api/v1/years"
+  //     );
+  //     this.years = yearResponse.data;
+  //   } catch (error) {
   //     console.error("An error occurred while fetching years: ", error);
-  //     }
-  //   },
+  //   }
+  // },
+
+  async mounted() {
+    try {
+      const studentResponse = await API.graphql(graphqlOperation(listStudents));
+      this.students = studentResponse.data.listStudents.items;
+    } catch (error) {
+      console.error("An error occurred while fetching students: ", error);
+    }
+
+    try {
+      const majorResponse = await API.graphql(graphqlOperation(listMajors));
+      this.majors = majorResponse.data.listMajors.items;
+    } catch (error) {
+      console.error("An error occurred while fetching majors: ", error);
+    }
+
+    try {
+      const yearResponse = await API.graphql(graphqlOperation(listYears));
+      this.years = yearResponse.data.listYears.items;
+    } catch (error) {
+      console.error("An error occurred while fetching years: ", error);
+    }
+  },
 
   methods: {
     openModal(student, mode) {
@@ -269,15 +275,17 @@ export default {
 
     async addStudent(studentData) {
       try {
-        await axios.post("http://localhost:1111/api/v1/students", studentData);
-        // await API.graphql(graphqlOperation(createStudent, { input: studentData }));
-        // Refresh the students list
-        const response = await axios.get(
-          "http://localhost:1111/api/v1/students"
+        // await axios.post("http://localhost:1111/api/v1/students", studentData);
+        await API.graphql(
+          graphqlOperation(createStudent, { input: studentData })
         );
-        this.students = response.data;
-        // const studentList = await API.graphql(graphqlOperation(listStudents));
-        // this.students = studentList.data.listStudents.items;
+        // Refresh the students list
+        // const response = await axios.get(
+        //   "http://localhost:1111/api/v1/students"
+        // );
+        // this.students = response.data;
+        const studentList = await API.graphql(graphqlOperation(listStudents));
+        this.students = studentList.data.listStudents.items;
       } catch (error) {
         console.error("An error occurred while adding a new student: ", error);
       }
