@@ -1,0 +1,23 @@
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type Student @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: AWSEmail!
+  majorID: ID! @index(name: "byMajor")
+  yearID: ID! @index(name: "byYear")
+}
+
+type Major @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  majorName: String!
+  Students: [Student] @hasMany(indexName: "byMajor", fields: ["id"])
+}
+
+type Year @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  academicYear: String!
+  Students: [Student] @hasMany(indexName: "byYear", fields: ["id"])
+}

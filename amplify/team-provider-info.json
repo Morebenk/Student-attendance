@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify1a12bf14d7044-staging-01826-authRole",
+      "UnauthRoleArn": "arn:aws:iam::121767535248:role/amplify-amplify1a12bf14d7044-staging-01826-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::121767535248:role/amplify-amplify1a12bf14d7044-staging-01826-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-amplify1a12bf14d7044-staging-01826-deployment",
+      "UnauthRoleName": "amplify-amplify1a12bf14d7044-staging-01826-unauthRole",
+      "StackName": "amplify-amplify1a12bf14d7044-staging-01826",
+      "StackId": "arn:aws:cloudformation:eu-west-2:121767535248:stack/amplify-amplify1a12bf14d7044-staging-01826/ae050730-75f0-11ee-b7f7-021462f68efe",
+      "AmplifyAppId": "d1bxh93ijgsg6o"
+    },
+    "categories": {
+      "auth": {
+        "Studentattendance": {}
+      }
+    }
+  }
+}
