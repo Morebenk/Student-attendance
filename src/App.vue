@@ -1,5 +1,5 @@
 <template>
-  <authenticator :loginMecanism="['email']" v-slot="{ signOut }">
+  <!-- <authenticator :loginMecanism="['email']" v-slot="{ signOut }"> -->
     <div class="app">
       <!-- Sidebar -->
       <Sidebar :signOut="signOut" />
@@ -7,7 +7,7 @@
       <!-- Content -->
       <router-view />
     </div>
-  </authenticator>
+ <!--</authenticator>-->
 </template>
 
 <script setup>
